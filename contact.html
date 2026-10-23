@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | JE & F Refrigeration and Airconditioning Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="je-f-refrigeration.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">JE & F</div>
+        <div>
+          <p class="brand-name">Refrigeration &amp; Airconditioning Services</p>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="https://wa.me/630000000000?text=Hello%20JE%20%26%20F%20Refrigeration%20and%20Airconditioning%20Services%2C%20I%20want%20to%20book%20a%20service." target="_blank" rel="noopener">Book Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero-content">
+        <div>
+          <p class="eyebrow">Contact Us</p>
+          <h1>Need help with your cooling or refrigeration system?</h1>
+          <p class="page-description">
+            Reach out to JE & F Refrigeration and Airconditioning Services for reliable support, honest recommendations,
+            and quality solutions tailored to your needs.
+          </p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1000&q=80" alt="Air conditioning service" />
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <p class="section-tag">Business Info</p>
+          <h3>Connect with us</h3>
+          <p><strong>Phone:</strong> +63 000 000 0000</p>
+          <p><strong>Email:</strong> jeandfservices@gmail.com</p>
+          <p><strong>Location:</strong> Cebu, Philippines</p>
+          <p><strong>Hours:</strong> Monday - Saturday, 8:00 AM - 6:00 PM</p>
+        </div>
+
+        <div class="contact-form" id="request-service">
+          <p class="section-tag">Request a Service</p>
+          <form id="service-form">
+            <label>
+              <span class="sr-only">Your Name</span>
+              <input type="text" name="name" placeholder="Your Name" required />
+            </label>
+            <label>
+              <span class="sr-only">Your Email</span>
+              <input type="email" name="email" placeholder="Your Email" required />
+            </label>
+            <label>
+              <span class="sr-only">Phone Number</span>
+              <input type="tel" name="phone" placeholder="Phone Number" required />
+            </label>
+            <label>
+              <span class="sr-only">Service Details</span>
+              <textarea name="message" placeholder="Tell us about your service needs" required></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary">Send Request</button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="current-year">2026</span> JE & F Refrigeration and Airconditioning Services</p>
+      <p>Cooling solutions you can trust.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('service-form');
+    const statusMessage = document.getElementById('form-status');
+
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const name = form.querySelector('[name="name"]').value.trim();
+        const email = form.querySelector('[name="email"]').value.trim();
+        const phone = form.querySelector('[name="phone"]').value.trim();
+        const message = form.querySelector('[name="message"]').value.trim();
+
+        const requestText =
+          'Hello JE & F Refrigeration and Airconditioning Services,\n\n' +
+          'Name: ' + name + '\n' +
+          'Email: ' + email + '\n' +
+          'Phone: ' + phone + '\n\n' +
+          'Service Request:\n' + message;
+
+        const whatsappUrl = 'https://wa.me/630000000000?text=' + encodeURIComponent(requestText);
+        const mailtoUrl = 'mailto:jeandfservices@gmail.com?subject=' + encodeURIComponent('Service Request from ' + name) + '&body=' + encodeURIComponent(requestText);
+
+        statusMessage.textContent = 'Preparing your request...';
+        statusMessage.style.display = 'block';
+
+        window.open(whatsappUrl, '_blank');
+        window.location.href = mailtoUrl;
+
+        form.reset();
+        setTimeout(function () {
+          statusMessage.textContent = 'Your request was prepared. Please send it using your email app or WhatsApp if the prompt did not open.';
+        }, 500);
+      });
+    }
+  </script>
+</body>
+</html>
